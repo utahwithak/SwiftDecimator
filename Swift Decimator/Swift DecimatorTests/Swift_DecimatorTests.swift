@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import simd
 @testable import Swift_Decimator
 
 class Swift_DecimatorTests: XCTestCase {
@@ -22,8 +23,13 @@ class Swift_DecimatorTests: XCTestCase {
     }
     
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let (positions, faces) = IcoSphereCreator.icospherePoints(level: 3, radius: 10, shift: float3(0,0,0))
+
+        let rawPoints = positions.map{ Vector3($0)}
+        let decimator = Decimator(points: rawPoints, triangles: faces)
+        decimator.decimate(targetVertices: 300, targetTriangles: 600, targetError: 1.0)
+        let (points, tris) = decimator.getMeshData()
+        print("points:\(points.count) tris:\(tris.count)")
     }
     
     func testPerformanceExample() {

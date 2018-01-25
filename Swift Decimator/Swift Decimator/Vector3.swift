@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import simd
 
 struct Vector3 {
     var x: Double
@@ -22,6 +23,11 @@ struct Vector3 {
         self.x = x
         self.y = y
         self.z = z
+    }
+    init(_ val: float3) {
+        self.x = Double(val.x)
+        self.y = Double(val.y)
+        self.z = Double(val.z)
     }
     init( x: Double,  y: Double,  z: Double) {
         self.x = x

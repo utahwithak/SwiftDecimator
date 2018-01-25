@@ -46,17 +46,13 @@ class Decimator {
         edges = [Edge](repeating:Edge(), count: triangleCount * 3)
         vertices = [Vertex](repeating:Vertex(), count: vertCount)
 
-        var tri = [0,0,0]
         var edge = Edge()
         edge.tag = true;
         edge.onBoundary = true;
-        var nEdges = 0;
 
         for t in 0..<triangleCount {
-            tri[0] = triangles[t].v0
-            tri[1] = triangles[t].v1
-            tri[2] = triangles[t].v2
-            trianglesTags[t] = true;
+            let tri = [triangles[t].v0, triangles[t].v1, triangles[t].v2]
+            trianglesTags.append(true)
             for k in 0..<3 {
                 edge.v1 = tri[k];
                 edge.v2 = tri[(k+1)%3];
@@ -65,9 +61,9 @@ class Decimator {
                     edges[idEdge].onBoundary = false;
                 } else {
                     edges.append(edge);
-                    vertices[edge.v1].edges.append(nEdges);
-                    vertices[edge.v2].edges.append(nEdges);
-                    nEdges += 1
+                    vertices[edge.v1].edges.append(edgeCount);
+                    vertices[edge.v2].edges.append(edgeCount);
+                    edgeCount += 1
                 }
             }
         }
@@ -130,9 +126,12 @@ class Decimator {
         }
         var idEdge = 0
         for it in 0..<vertices[v2].edges.count  {
+            if it >= vertices[v2].edges.count {
+                break
+            }
             idEdge = vertices[v2].edges[it]
             let w = (edges[idEdge].v1 == v2) ? edges[idEdge].v2 : edges[idEdge].v1;
-            if w==v1 {
+            if w == v1 {
                 edges[idEdge].tag = false;
                 vertices[w].remove(edge: idEdge)
                 edgeCount -= 1
@@ -388,11 +387,12 @@ class Decimator {
 
         let oldPosV1 =  points[v1];
         let oldPosV2 =  points[v2];
+        var tris = vertices[v1].triangles
         for idTriangle in vertices[v2].triangles {
-            vertices[v1].triangles.append(idTriangle);
+            tris.append(idTriangle);
         }
 
-        for idTriangle in vertices[v1].triangles {
+        for idTriangle in tris {
             let a0 = triangles[idTriangle].v0
             let a1 = triangles[idTriangle].v1
             let a2 = triangles[idTriangle].v2
@@ -477,6 +477,49 @@ class Decimator {
         return true;
     }
 
+
+    func decimate( targetVertices: Int, targetTriangles: Int, targetError: Double) {
+        var qem = 0.0;
+
+        initializeQEM();
+        initializePriorityQueue();
+
+        let invDiag = 1 / diagBB;
+        while !pqueue.isEmpty && edgeCount > 0 && vertCount > targetVertices && triangleCount > targetTriangles && qem < targetError {
+
+            if !edgeCollapse(qem: &qem) {
+                break;
+            }
+            if qem < 0.0 {
+                qem = 0.0;
+            } else {
+                qem = sqrt(qem) * invDiag;
+            }
+        }
+
+    }
+
+    func getMeshData() -> ([Vector3], [Triangle]) {
+        var map = [Int](repeating: 0, count: pointCount)
+        var points = [Vector3]()
+        var triangles = [Triangle]()
+        var counter = 0;
+        for v in 0..<pointCount {
+            if vertices[v].tag {
+                points.append(self.points[v])
+                map[v] = counter
+                counter += 1
+            }
+        }
+        counter = 0;
+        for t in 0..<initialTriangles {
+            if trianglesTags[t] {
+                let triangle = Triangle(v0:  map[self.triangles[t].v0], v1: map[self.triangles[t].v1], v2: map[self.triangles[t].v2])
+                triangles.append(triangle)
+            }
+        }
+        return (points, triangles)
+    }
 
 
     struct Vertex {
