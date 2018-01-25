@@ -10,6 +10,9 @@
 		8FE1B4362018F9F0005C4FA3 /* Swift_Decimator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE1B42C2018F9F0005C4FA3 /* Swift_Decimator.framework */; };
 		8FE1B43B2018F9F0005C4FA3 /* Swift_DecimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B43A2018F9F0005C4FA3 /* Swift_DecimatorTests.swift */; };
 		8FE1B43D2018F9F0005C4FA3 /* Swift_Decimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE1B42F2018F9F0005C4FA3 /* Swift_Decimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8FE1B4472018FBE7005C4FA3 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B4462018FBE7005C4FA3 /* Vector3.swift */; };
+		8FE1B44920191019005C4FA3 /* Decimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B44820191019005C4FA3 /* Decimator.swift */; };
+		8FE1B44D201915CC005C4FA3 /* PriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B44C201915CC005C4FA3 /* PriorityQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,9 @@
 		8FE1B4352018F9F0005C4FA3 /* Swift DecimatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift DecimatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FE1B43A2018F9F0005C4FA3 /* Swift_DecimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_DecimatorTests.swift; sourceTree = "<group>"; };
 		8FE1B43C2018F9F0005C4FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8FE1B4462018FBE7005C4FA3 /* Vector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		8FE1B44820191019005C4FA3 /* Decimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decimator.swift; sourceTree = "<group>"; };
+		8FE1B44C201915CC005C4FA3 /* PriorityQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,9 @@
 			isa = PBXGroup;
 			children = (
 				8FE1B42F2018F9F0005C4FA3 /* Swift_Decimator.h */,
+				8FE1B44820191019005C4FA3 /* Decimator.swift */,
+				8FE1B4462018FBE7005C4FA3 /* Vector3.swift */,
+				8FE1B44C201915CC005C4FA3 /* PriorityQueue.swift */,
 				8FE1B4302018F9F0005C4FA3 /* Info.plist */,
 			);
 			path = "Swift Decimator";
@@ -148,6 +157,7 @@
 				TargetAttributes = {
 					8FE1B42B2018F9F0005C4FA3 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					8FE1B4342018F9F0005C4FA3 = {
@@ -196,6 +206,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FE1B44920191019005C4FA3 /* Decimator.swift in Sources */,
+				8FE1B4472018FBE7005C4FA3 /* Vector3.swift in Sources */,
+				8FE1B44D201915CC005C4FA3 /* PriorityQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +346,7 @@
 		8FE1B4412018F9F0005C4FA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -348,6 +362,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datumapps.Swift-Decimator";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -355,6 +370,7 @@
 		8FE1B4422018F9F0005C4FA3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -377,6 +393,7 @@
 		8FE1B4442018F9F0005C4FA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QV4QS82KBT;
@@ -391,6 +408,7 @@
 		8FE1B4452018F9F0005C4FA3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QV4QS82KBT;
