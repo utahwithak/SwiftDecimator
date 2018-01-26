@@ -14,6 +14,9 @@
 		8FE1B4472018FBE7005C4FA3 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B4462018FBE7005C4FA3 /* Vector3.swift */; };
 		8FE1B44920191019005C4FA3 /* Decimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B44820191019005C4FA3 /* Decimator.swift */; };
 		8FE1B44D201915CC005C4FA3 /* PriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B44C201915CC005C4FA3 /* PriorityQueue.swift */; };
+		8FF59A32201A720600829044 /* dodecahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 8FF59A2F201A720600829044 /* dodecahedron.obj */; };
+		8FF59A33201A720600829044 /* pumpkin_tall_10k.obj in Resources */ = {isa = PBXBuildFile; fileRef = 8FF59A30201A720600829044 /* pumpkin_tall_10k.obj */; };
+		8FF59A34201A720600829044 /* teddy.obj in Resources */ = {isa = PBXBuildFile; fileRef = 8FF59A31201A720600829044 /* teddy.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +40,9 @@
 		8FE1B4462018FBE7005C4FA3 /* Vector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
 		8FE1B44820191019005C4FA3 /* Decimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decimator.swift; sourceTree = "<group>"; };
 		8FE1B44C201915CC005C4FA3 /* PriorityQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityQueue.swift; sourceTree = "<group>"; };
+		8FF59A2F201A720600829044 /* dodecahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dodecahedron.obj; sourceTree = "<group>"; };
+		8FF59A30201A720600829044 /* pumpkin_tall_10k.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pumpkin_tall_10k.obj; sourceTree = "<group>"; };
+		8FF59A31201A720600829044 /* teddy.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = teddy.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,9 @@
 			children = (
 				8F732D9E2019745A00A498F8 /* IcosphereCreator.swift */,
 				8FE1B43A2018F9F0005C4FA3 /* Swift_DecimatorTests.swift */,
+				8FF59A2F201A720600829044 /* dodecahedron.obj */,
+				8FF59A30201A720600829044 /* pumpkin_tall_10k.obj */,
+				8FF59A31201A720600829044 /* teddy.obj */,
 				8FE1B43C2018F9F0005C4FA3 /* Info.plist */,
 			);
 			path = "Swift DecimatorTests";
@@ -199,6 +208,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FF59A33201A720600829044 /* pumpkin_tall_10k.obj in Resources */,
+				8FF59A32201A720600829044 /* dodecahedron.obj in Resources */,
+				8FF59A34201A720600829044 /* teddy.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

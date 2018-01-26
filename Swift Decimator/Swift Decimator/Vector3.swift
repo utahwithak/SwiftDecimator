@@ -9,7 +9,9 @@
 import Foundation
 import simd
 
-struct Vector3 {
+public struct Vector3 {
+    public static let zero = Vector3(x: 0, y: 0, z: 0)
+
     var x: Double
     var y: Double
     var z: Double
@@ -43,13 +45,22 @@ struct Vector3 {
     }
 
     mutating func normalize() {
-        self /= magnitude
+        if magnitude != 0 {
+            self /= magnitude
+        }
     }
     var normalized: Vector3 {
-        return self / magnitude
+        let magnitude = self.magnitude
+        if magnitude != 0 {
+            return self / magnitude
+        }
+        return self
     }
     func dot(_ other: Vector3) -> Double {
         return self * other
+    }
+    var asFloat3: float3 {
+        return float3(Float(x), Float(y), Float(z))
     }
 }
 
