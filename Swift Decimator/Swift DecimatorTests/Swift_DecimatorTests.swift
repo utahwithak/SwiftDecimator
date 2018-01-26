@@ -74,6 +74,30 @@ class Swift_DecimatorTests: XCTestCase {
 //            print("Error: " + String(cString: strerror(errno)))
 //        }
     }
+
+    func testTeddy() {
+            let bundle = Bundle(for: type(of:self))
+            guard let url = bundle.url(forResource: "teddy", withExtension: "obj") else {
+                XCTAssert(false)
+                return
+            }
+
+            guard let decimator = Decimator(OBJAt: url) else {
+                XCTAssert(false, "invalid url")
+                return
+            }
+
+            decimator.decimate(targetVertices: 100, targetTriangles: 150, targetError: 1)
+            let objFile = decimator.generateOBJ()
+            guard !objFile.isEmpty else {
+                XCTAssert(false)
+                return
+            }
+
+            let path = "/Users/carl8382/Desktop/teddy.obj"
+
+            try! objFile.write(to: URL(fileURLWithPath: path), atomically: true, encoding: .utf8)
+    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

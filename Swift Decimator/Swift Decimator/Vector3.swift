@@ -121,17 +121,9 @@ func *(lhs: Vector3, rhs: Vector3) -> Double {
 }
 
 func ^(lhs: Vector3, rhs: Vector3) -> Vector3 {
+
     return Vector3(x: lhs.y * rhs.z - lhs.z * rhs.y,
                    y: lhs.z * rhs.x - lhs.x * rhs.z,
                    z: lhs.x * rhs.y - lhs.y * rhs.x)
 }
 
-func collinear(a: Vector3, b: Vector3, c: Vector3) -> Bool {
-    return  ((c.z - a.z) * (b.y - a.y) - (b.z - a.z) * (c.y - a.y) == 0.0 /*EPS*/) &&
-        ((b.z - a.z) * (c.x - a.x) - (b.x - a.x) * (c.z - a.z) == 0.0 /*EPS*/) &&
-        ((b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x) == 0.0 /*EPS*/)
-}
-
-func volume( a: Vector3,  b: Vector3,c: Vector3, d: Vector3) -> Double {
-    return (a - d) * ((b - d) ^ (c - d))
-}

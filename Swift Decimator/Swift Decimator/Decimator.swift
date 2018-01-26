@@ -286,7 +286,6 @@ public class Decimator {
         diagBB = coordMax.magnitude
 
         for v in 0..<pointCount {
-            vertices[v].resetQ()
             for idTriangle in vertices[v].triangles {
                 let i = triangles[idTriangle].v0
                 let j = triangles[idTriangle].v1
@@ -296,16 +295,16 @@ public class Decimator {
 
                 n.normalize()
                 let d = -(points[v] * n)
-                vertices[v].Q[0] += area * (n.x * n.x);
-                vertices[v].Q[1] += area * (n.x * n.y);
-                vertices[v].Q[2] += area * (n.x * n.z);
-                vertices[v].Q[3] += area * (n.x * d);
-                vertices[v].Q[4] += area * (n.y * n.y);
-                vertices[v].Q[5] += area * (n.y * n.z);
-                vertices[v].Q[6] += area * (n.y * d);
-                vertices[v].Q[7] += area * (n.z * n.z);
-                vertices[v].Q[8] += area * (n.z * d);
-                vertices[v].Q[9] += area * (d     * d);
+                vertices[v].Q0 += area * (n.x * n.x);
+                vertices[v].Q1 += area * (n.x * n.y);
+                vertices[v].Q2 += area * (n.x * n.z);
+                vertices[v].Q3 += area * (n.x * d);
+                vertices[v].Q4 += area * (n.y * n.y);
+                vertices[v].Q5 += area * (n.y * n.z);
+                vertices[v].Q6 += area * (n.y * d);
+                vertices[v].Q7 += area * (n.z * n.z);
+                vertices[v].Q8 += area * (n.z * d);
+                vertices[v].Q9 += area * (d     * d);
             }
         }
 
@@ -331,28 +330,28 @@ public class Decimator {
 
 
                 var d = -(points[v1] * n);
-                vertices[v1].Q[0] += area * (n.x * n.x);
-                vertices[v1].Q[1] += area * (n.x * n.y);
-                vertices[v1].Q[2] += area * (n.x * n.z);
-                vertices[v1].Q[3] += area * (n.x * d);
-                vertices[v1].Q[4] += area * (n.y * n.y);
-                vertices[v1].Q[5] += area * (n.y * n.z);
-                vertices[v1].Q[6] += area * (n.y * d);
-                vertices[v1].Q[7] += area * (n.z * n.z);
-                vertices[v1].Q[8] += area * (n.z * d);
-                vertices[v1].Q[9] += area * (d * d);
+                vertices[v1].Q0 += area * (n.x * n.x);
+                vertices[v1].Q1 += area * (n.x * n.y);
+                vertices[v1].Q2 += area * (n.x * n.z);
+                vertices[v1].Q3 += area * (n.x * d);
+                vertices[v1].Q4 += area * (n.y * n.y);
+                vertices[v1].Q5 += area * (n.y * n.z);
+                vertices[v1].Q6 += area * (n.y * d);
+                vertices[v1].Q7 += area * (n.z * n.z);
+                vertices[v1].Q8 += area * (n.z * d);
+                vertices[v1].Q9 += area * (d * d);
 
                 d = -(points[v2] * n);
-                vertices[v2].Q[0] += area * (n.x * n.x);
-                vertices[v2].Q[1] += area * (n.x * n.y);
-                vertices[v2].Q[2] += area * (n.x * n.z);
-                vertices[v2].Q[3] += area * (n.x * d);
-                vertices[v2].Q[4] += area * (n.y * n.y);
-                vertices[v2].Q[5] += area * (n.y * n.z);
-                vertices[v2].Q[6] += area * (n.y * d);
-                vertices[v2].Q[7] += area * (n.z * n.z);
-                vertices[v2].Q[8] += area * (n.z * d);
-                vertices[v2].Q[9] += area * (d * d);
+                vertices[v2].Q0 += area * (n.x * n.x);
+                vertices[v2].Q1 += area * (n.x * n.y);
+                vertices[v2].Q2 += area * (n.x * n.z);
+                vertices[v2].Q3 += area * (n.x * d);
+                vertices[v2].Q4 += area * (n.y * n.y);
+                vertices[v2].Q5 += area * (n.y * n.z);
+                vertices[v2].Q6 += area * (n.y * d);
+                vertices[v2].Q7 += area * (n.z * n.z);
+                vertices[v2].Q8 += area * (n.z * d);
+                vertices[v2].Q9 += area * (d * d);
             }
         }
     }
@@ -387,31 +386,38 @@ public class Decimator {
 
     private func computeEdgeCost(v1: Int, v2: Int, newPos: inout Vector3) -> Double {
 
-        let Q = (0..<10).map { vertices[v1].Q[$0] + vertices[v2].Q[$0]}
+        let Q0 = vertices[v1].Q0 + vertices[v2].Q0
+        let Q1 = vertices[v1].Q1 + vertices[v2].Q1
+        let Q2 = vertices[v1].Q2 + vertices[v2].Q2
+        let Q3 = vertices[v1].Q3 + vertices[v2].Q3
+        let Q4 = vertices[v1].Q4 + vertices[v2].Q4
+        let Q5 = vertices[v1].Q5 + vertices[v2].Q5
+        let Q6 = vertices[v1].Q6 + vertices[v2].Q6
+        let Q7 = vertices[v1].Q7 + vertices[v2].Q7
+        let Q8 = vertices[v1].Q8 + vertices[v2].Q8
+        let Q9 = vertices[v1].Q9 + vertices[v2].Q9
 
 
-        let M0 = Q[0] // (0, 0)
-        let M1 = Q[1] // (0, 1)
-        let M2 = Q[2] // (0, 2)
-        let M3 = Q[3] // (0, 3)
-        let M4 = Q[1] // (1, 0)
-        let M5 = Q[4] // (1, 1)
-        let M6 = Q[5] // (1, 2)
-        let M7 = Q[6] // (1, 3)
-        let M8 = Q[2] // (2, 0)
-        let M9 = Q[5] // (2, 1)
-        let M10 = Q[7] // (2, 2);
-        let M11 = Q[8] // (2, 3);
-
-        let det = M0 * M5 * M10 + M1 * M6 * M8 + M2 * M4 * M9 - M0 * M6 * M9  - M1 * M4 * M10 - M2 * M5 * M8;
+        let q22 = Q2 * Q2
+        let q11 = Q1 * Q1
+        let q55 = Q5 * Q5
+        let q15 = Q1 * Q5
+        let q34 = Q3 * Q4
+        let q06 = Q0 * Q6
+        let det = Q0 * Q4 * Q7 +
+            q15 * Q2 +
+            Q2 * Q1 * Q5 -
+            Q0 * q55 -
+            q11 * Q7 -
+            q22 * Q4 ;
 
         var pos = Vector3(x: 0, y: 0, z: 0)
 
         if det != 0.0 {
             let d = 1.0 / det;
-            pos.x = d * (M1 * M7 * M10 + M2 * M5 * M11 + M3 * M6 * M9 - M1 * M6 * M11 - M2 * M7 * M9  - M3 * M5 * M10);
-            pos.y = d * (M0 * M6 * M11 + M2 * M7 * M8  + M3 * M4 * M10 - M0 * M7 * M10 - M2 * M4 * M11 - M3 * M6 * M8);
-            pos.z = d * (M0 * M7 * M9  + M1 * M4 * M11 + M3 * M5 * M8  - M0 * M5 * M11 - M1 * M7 * M8  - M3 * M4 * M9);
+            pos.x = d * (Q1 * Q6 * Q7 + Q2 * Q4 * Q8 + Q3 * q55 - q15 * Q8 - Q2 * Q6 * Q5  - q34 * Q7);
+            pos.y = d * (Q0 * Q5 * Q8 + q22 * Q6  + Q3 * Q1 * Q7 - q06 * Q7 - Q2 * Q1 * Q8 - Q3 * Q5 * Q2);
+            pos.z = d * (q06 * Q5  + q11 * Q8 + q34 * Q2  - Q0 * Q4 * Q8 - Q1 * Q6 * Q2  - Q3 * q15);
             newPos.x = pos.x
             newPos.y = pos.y
             newPos.z = pos.z
@@ -423,20 +429,18 @@ public class Decimator {
             pos.z = newPos.z
         }
 
-        let qem = pos.x  * (Q[0] * pos.x + Q[1] * pos.y + Q[2] * pos.z + Q[3]) +
-                  pos.y  * (Q[1] * pos.x + Q[4] * pos.y + Q[5] * pos.z + Q[6]) +
-                  pos.z  * (Q[2] * pos.x + Q[5] * pos.y + Q[7] * pos.z + Q[8]) +
-                           (Q[3] * pos.x + Q[6] * pos.y + Q[8] * pos.z + Q[9])
+        let qem = pos.x  * (Q0 * pos.x + Q1 * pos.y + Q2 * pos.z + Q3) +
+            pos.y  * (Q1 * pos.x + Q4 * pos.y + Q5 * pos.z + Q6) +
+            pos.z  * (Q2 * pos.x + Q5 * pos.y + Q7 * pos.z + Q8) +
+            (Q3 * pos.x + Q6 * pos.y + Q8 * pos.z + Q9)
 
         let oldPosV1 =  points[v1];
         let oldPosV2 =  points[v2];
 
         var tris = vertices[v1].triangles
-        for idTriangle in vertices[v2].triangles {
-            if !tris.contains(idTriangle) {
-                tris.append(idTriangle)
-            }
 
+        for idTriangle in vertices[v2].triangles where !tris.contains(idTriangle) {
+            tris.append(idTriangle)
         }
 
         for idTriangle in tris {
@@ -444,12 +448,12 @@ public class Decimator {
             let a1 = triangles[idTriangle].v1
             let a2 = triangles[idTriangle].v2
 
-            let n1 = ((points[a1] - points[a0]) ^ (points[a2] - points[a0]) ).normalized
+            let n1 = ((points[a1] - points[a0]) ^ (points[a2] - points[a0]) )//.normalized
 
             points[v1] = newPos;
             points[v2] = newPos;
 
-            let n2 =  ((points[a1] - points[a0]) ^ (points[a2] - points[a0])).normalized
+            let n2 =  ((points[a1] - points[a0]) ^ (points[a2] - points[a0]))//.normalized
 
             points[v1] = oldPosV1;
             points[v2] = oldPosV2;
@@ -490,9 +494,18 @@ public class Decimator {
         qem = currentEdge.qem;
         edgeCollapse(v1: v1, v2: v2);
         points[v1] = edges[currentEdge.name].position
-        for k in 0..<10 {
-            vertices[v1].Q[k] += vertices[v2].Q[k];
-        }
+
+        vertices[v1].Q0 += vertices[v2].Q0
+        vertices[v1].Q1 += vertices[v2].Q1
+        vertices[v1].Q2 += vertices[v2].Q2
+        vertices[v1].Q3 += vertices[v2].Q3
+        vertices[v1].Q4 += vertices[v2].Q4
+        vertices[v1].Q5 += vertices[v2].Q5
+        vertices[v1].Q6 += vertices[v2].Q6
+        vertices[v1].Q7 += vertices[v2].Q7
+        vertices[v1].Q8 += vertices[v2].Q8
+        vertices[v1].Q9 += vertices[v2].Q9
+
 
         // Update priority queue
         var incidentVertices = [Int]()
@@ -536,8 +549,6 @@ public class Decimator {
             if !edgeCollapse(qem: &qem) {
                 break;
             }
-            print("qem:\(qem)")
-
             if qem < 0.0 {
                 qem = 0.0;
             } else {
@@ -573,11 +584,19 @@ public class Decimator {
     struct Vertex {
         var edges = [Int]()
         var triangles = [Int]()
-        var Q = [Double](repeating: 0, count: 10)
-        // 0 1 2 3
-        //   4 5 6
-        //     7 8
-        //       9
+
+
+        var Q0 = 0.0
+        var Q1 = 0.0
+        var Q2 = 0.0
+        var Q3 = 0.0
+        var Q4 = 0.0
+        var Q5 = 0.0
+        var Q6 = 0.0
+        var Q7 = 0.0
+        var Q8 = 0.0
+        var Q9 = 0.0
+
         var tag = true
         var onBoundary = false
 
@@ -604,35 +623,16 @@ public class Decimator {
             }
             edges.append(edge)
         }
-        mutating func resetQ() {
-            memset(&Q, 0, Q.count * MemoryLayout<Double>.size)
-        }
     }
 
     public func generateOBJ() -> String {
         var file = ""
-        var map = [Int](repeating: 0, count: pointCount)
-        var points = [Vector3]()
-        var triangles = [Triangle]()
-        var counter = 0;
-        for v in 0..<pointCount {
-            if vertices[v].tag {
-                points.append(self.points[v])
-                map[v] = counter
-                counter += 1
-            }
-        }
-        counter = 0;
-        for t in 0..<initialTriangles {
-            if trianglesTags[t] {
-                let triangle = Triangle(v0:  map[self.triangles[t].v0], v1: map[self.triangles[t].v1], v2: map[self.triangles[t].v2])
-                triangles.append(triangle)
-            }
-        }
+        let (points,triangles) = getMeshData()
 
         for p in points {
             file += "v \(p.x) \(p.y) \(p.z)\n"
         }
+        
         for tri in triangles {
             file += "f \(tri.v0 + 1) \(tri.v1 + 1) \(tri.v2 + 1)\n"
         }

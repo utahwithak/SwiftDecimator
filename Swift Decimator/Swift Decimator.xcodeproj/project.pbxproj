@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8F732D9F2019745A00A498F8 /* IcosphereCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F732D9E2019745A00A498F8 /* IcosphereCreator.swift */; };
+		8FD325F6201BA91D0052B036 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD325F5201BA91D0052B036 /* main.swift */; };
+		8FD325FA201BA9220052B036 /* Decimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B44820191019005C4FA3 /* Decimator.swift */; };
+		8FD325FB201BA9220052B036 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B4462018FBE7005C4FA3 /* Vector3.swift */; };
+		8FD325FC201BA9220052B036 /* PriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B44C201915CC005C4FA3 /* PriorityQueue.swift */; };
 		8FE1B4362018F9F0005C4FA3 /* Swift_Decimator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE1B42C2018F9F0005C4FA3 /* Swift_Decimator.framework */; };
 		8FE1B43B2018F9F0005C4FA3 /* Swift_DecimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1B43A2018F9F0005C4FA3 /* Swift_DecimatorTests.swift */; };
 		8FE1B43D2018F9F0005C4FA3 /* Swift_Decimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE1B42F2018F9F0005C4FA3 /* Swift_Decimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,8 +33,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8FD325F1201BA91C0052B036 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8F732D9E2019745A00A498F8 /* IcosphereCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IcosphereCreator.swift; sourceTree = "<group>"; };
+		8FD325F3201BA91C0052B036 /* decim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = decim; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FD325F5201BA91D0052B036 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		8FE1B42C2018F9F0005C4FA3 /* Swift_Decimator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swift_Decimator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FE1B42F2018F9F0005C4FA3 /* Swift_Decimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Swift_Decimator.h; sourceTree = "<group>"; };
 		8FE1B4302018F9F0005C4FA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +64,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8FD325F0201BA91C0052B036 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8FE1B4282018F9F0005C4FA3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -64,11 +89,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8FD325F4201BA91D0052B036 /* decim */ = {
+			isa = PBXGroup;
+			children = (
+				8FD325F5201BA91D0052B036 /* main.swift */,
+			);
+			path = decim;
+			sourceTree = "<group>";
+		};
 		8FE1B4222018F9F0005C4FA3 = {
 			isa = PBXGroup;
 			children = (
 				8FE1B42E2018F9F0005C4FA3 /* Swift Decimator */,
 				8FE1B4392018F9F0005C4FA3 /* Swift DecimatorTests */,
+				8FD325F4201BA91D0052B036 /* decim */,
 				8FE1B42D2018F9F0005C4FA3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,6 +112,7 @@
 			children = (
 				8FE1B42C2018F9F0005C4FA3 /* Swift_Decimator.framework */,
 				8FE1B4352018F9F0005C4FA3 /* Swift DecimatorTests.xctest */,
+				8FD325F3201BA91C0052B036 /* decim */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,6 +156,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		8FD325F2201BA91C0052B036 /* decim */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8FD325F9201BA91D0052B036 /* Build configuration list for PBXNativeTarget "decim" */;
+			buildPhases = (
+				8FD325EF201BA91C0052B036 /* Sources */,
+				8FD325F0201BA91C0052B036 /* Frameworks */,
+				8FD325F1201BA91C0052B036 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = decim;
+			productName = decim;
+			productReference = 8FD325F3201BA91C0052B036 /* decim */;
+			productType = "com.apple.product-type.tool";
+		};
 		8FE1B42B2018F9F0005C4FA3 /* Swift Decimator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8FE1B4402018F9F0005C4FA3 /* Build configuration list for PBXNativeTarget "Swift Decimator" */;
@@ -167,6 +219,10 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Datum Apps";
 				TargetAttributes = {
+					8FD325F2201BA91C0052B036 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					8FE1B42B2018F9F0005C4FA3 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0920;
@@ -192,6 +248,7 @@
 			targets = (
 				8FE1B42B2018F9F0005C4FA3 /* Swift Decimator */,
 				8FE1B4342018F9F0005C4FA3 /* Swift DecimatorTests */,
+				8FD325F2201BA91C0052B036 /* decim */,
 			);
 		};
 /* End PBXProject section */
@@ -217,6 +274,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8FD325EF201BA91C0052B036 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FD325FA201BA9220052B036 /* Decimator.swift in Sources */,
+				8FD325FC201BA9220052B036 /* PriorityQueue.swift in Sources */,
+				8FD325FB201BA9220052B036 /* Vector3.swift in Sources */,
+				8FD325F6201BA91D0052B036 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8FE1B4272018F9F0005C4FA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -247,6 +315,26 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		8FD325F7201BA91D0052B036 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QV4QS82KBT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		8FD325F8201BA91D0052B036 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QV4QS82KBT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		8FE1B43E2018F9F0005C4FA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -439,6 +527,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8FD325F9201BA91D0052B036 /* Build configuration list for PBXNativeTarget "decim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8FD325F7201BA91D0052B036 /* Debug */,
+				8FD325F8201BA91D0052B036 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8FE1B4262018F9F0005C4FA3 /* Build configuration list for PBXProject "Swift Decimator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

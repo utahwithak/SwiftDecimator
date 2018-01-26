@@ -32,19 +32,11 @@
 public struct PriorityQueue<T: Comparable> {
 
     fileprivate var heap = [T]()
-    private let ordered: (T, T) -> Bool
-
-    public init(ascending: Bool = false, startingValues: [T] = []) {
-        self.init(order: ascending ? { $0 > $1 } : { $0 < $1 }, startingValues: startingValues)
-    }
 
     /// Creates a new PriorityQueue with the given ordering.
-    ///
-    /// - parameter order: A function that specifies whether its first argument should
-    ///                    come after the second argument in the PriorityQueue.
+
     /// - parameter startingValues: An array of elements to initialize the PriorityQueue with.
-    public init(order: @escaping (T, T) -> Bool, startingValues: [T] = []) {
-        ordered = order
+    public init(startingValues: [T] = []) {
 
         // Based on "Heap construction" from Sedgewick p 323
         heap = startingValues
@@ -128,12 +120,13 @@ public struct PriorityQueue<T: Comparable> {
     // Based on example from Sedgewick p 316
     private mutating func sink(_ index: Int) {
         var index = index
-        while 2 * index + 1 < heap.count {
+        let count = heap.count
+        while 2 * index + 1 < count {
 
             var j = 2 * index + 1
 
-            if j < (heap.count - 1) && ordered(heap[j], heap[j + 1]) { j += 1 }
-            if !ordered(heap[index], heap[j]) { break }
+            if j < (count - 1) && heap[j] < heap[j + 1] { j += 1 }
+            if !(heap[index] < heap[j]) { break }
 
             heap.swapAt(index, j)
             index = j
@@ -143,7 +136,7 @@ public struct PriorityQueue<T: Comparable> {
     // Based on example from Sedgewick p 316
     private mutating func swim(_ index: Int) {
         var index = index
-        while index > 0 && ordered(heap[(index - 1) / 2], heap[index]) {
+        while index > 0 && heap[(index - 1) / 2] < heap[index] {
             heap.swapAt((index - 1) / 2, index)
             index = (index - 1) / 2
         }
