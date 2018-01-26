@@ -437,13 +437,10 @@ public class Decimator {
         let oldPosV1 =  points[v1];
         let oldPosV2 =  points[v2];
 
-        var tris = vertices[v1].triangles
 
-        for idTriangle in vertices[v2].triangles where !tris.contains(idTriangle) {
-            tris.append(idTriangle)
-        }
 
-        for idTriangle in tris {
+
+        for idTriangle in vertices[v1].triangles {
             let a0 = triangles[idTriangle].v0
             let a1 = triangles[idTriangle].v1
             let a2 = triangles[idTriangle].v2
@@ -462,6 +459,31 @@ public class Decimator {
                 return Double.greatestFiniteMagnitude
             }
         }
+        for idTriangle in vertices[v2].triangles where !vertices[v1].triangles.contains(idTriangle) {
+            let a0 = triangles[idTriangle].v0
+            let a1 = triangles[idTriangle].v1
+            let a2 = triangles[idTriangle].v2
+
+            let n1 = ((points[a1] - points[a0]) ^ (points[a2] - points[a0]) )//.normalized
+
+            points[v1] = newPos;
+            points[v2] = newPos;
+
+            let n2 =  ((points[a1] - points[a0]) ^ (points[a2] - points[a0]))//.normalized
+
+            points[v1] = oldPosV1;
+            points[v2] = oldPosV2;
+
+            if n1 * n2 < 0.0 {
+                return Double.greatestFiniteMagnitude
+            }
+            
+        }
+
+
+
+
+
 
         if ecolManifoldConstraint && !manifoldConstraint(v1: v1, v2: v2) {
             return Double.greatestFiniteMagnitude
